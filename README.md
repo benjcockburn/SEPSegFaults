@@ -26,27 +26,6 @@ SEPSegFaults/
 
 ---
 
-## Full Repository Layout
-SEPSegFaults/
-│
-├── docs/               # Documentation (user guides, reports, design notes)
-├── notebooks/          # Jupyter notebooks for experiments
-├── src/                # Main Python source code
-│   └── mass_sim/       # Package folder (importable as import mass_sim)
-│       └── init.py
-├── tests/              # Unit & integration tests
-├── configs/            # JSON/YAML config files for simulation parameters
-├── scripts/            # Helper scripts for running tasks
-├── data/               # Sample datasets or inputs (small!)
-│   └── .gitignore      # ignore big/raw data
-├── requirements.txt    # Python dependencies
-├── setup.py            # (optional) installable package
-├── README.md           # Overview & usage instructions
-└── .gitignore          # Git ignore rules
-
-
----
-
 ## Getting Started
 
 1. **Clone the repository**
