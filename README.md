@@ -1,12 +1,13 @@
 # SEPSegFaults
 MASS Simulator - README Documentation
 
-Project Overview:
-This project develops algorithms to efficiently explore complex state spaces for the
+## Project Overview
+This project develops algorithms to efficiently explore complex state spaces for the  
 Multi-Ammunition Soft-Kill System (MASS). The goal is to simulate missile–ship engagements safely and cost-effectively, and to predict state space behaviour without exhaustively simulating all possible combinations.
 
+---
 
-Repository Structure
+## Repository Structure
 SEPSegFaults/
 ■■■ src/ # Source code
 ■ ■■■ algorithms/ # State space exploration algorithms
@@ -23,7 +24,9 @@ SEPSegFaults/
 ■■■ LICENSE # Project licence
 ■■■ README.md # This file
 
+---
 
+## Full Repository Layout
 SEPSegFaults/
 │
 ├── docs/                  # Documentation (user guides, reports, design notes)
@@ -42,13 +45,18 @@ SEPSegFaults/
 └── .gitignore             # Git ignore rules
 
 
-Getting Started
-1. Clone the repository
+---
+
+## Getting Started
+
+1. **Clone the repository**
 
 2. Create and activate a virtual environment
 python -m venv venv
 source venv/bin/activate (Linux/Mac)
 venv\Scripts\activate (Windows)
+
+
 
 3. Install dependencies
 pip install -r requirements.txt
