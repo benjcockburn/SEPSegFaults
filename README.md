@@ -9,40 +9,40 @@ Multi-Ammunition Soft-Kill System (MASS). The goal is to simulate missile–ship
 
 ## Repository Structure
 SEPSegFaults/
-■■■ src/ # Source code
-■ ■■■ algorithms/ # State space exploration algorithms
-■ ■■■ simulation/ # Simulation engine and utilities
-■ ■■■ __init__.py
-■■■ tests/ # Unit and integration tests
-■■■ notebooks/ # Jupyter notebooks for exploration
-■■■ configs/ # Simulation parameters (YAML/JSON)
-■■■ results/ # Experiment outputs
-■■■ docs/ # Documentation
-■■■ .github/workflows/ # GitHub Actions (CI)
-■■■ requirements.txt # Python dependencies
-■■■ .gitignore # Ignored files
-■■■ LICENSE # Project licence
-■■■ README.md # This file
+├── src/                 # Source code
+│   ├── algorithms/      # State space exploration algorithms
+│   ├── simulation/      # Simulation engine and utilities
+│   └── init.py
+├── tests/               # Unit and integration tests
+├── notebooks/           # Jupyter notebooks for exploration
+├── configs/             # Simulation parameters (YAML/JSON)
+├── results/             # Experiment outputs
+├── docs/                # Documentation
+├── .github/workflows/   # GitHub Actions (CI)
+├── requirements.txt     # Python dependencies
+├── .gitignore           # Ignored files
+├── LICENSE              # Project licence
+└── README.md            # This file
 
 ---
 
 ## Full Repository Layout
 SEPSegFaults/
 │
-├── docs/                  # Documentation (user guides, reports, design notes)
-├── notebooks/             # Jupyter notebooks for experiments
-├── src/                   # Main Python source code
-│   └── mass_sim/          # Package folder (importable as `import mass_sim`)
-│       └── __init__.py
-├── tests/                 # Unit & integration tests
-├── configs/               # JSON/YAML config files for simulation parameters
-├── scripts/               # Helper scripts for running tasks
-├── data/                  # Sample datasets or inputs (small!)
-│   └── .gitignore         # ignore big/raw data
-├── requirements.txt       # Python dependencies
-├── setup.py               # (optional) installable package
-├── README.md              # Overview & usage instructions
-└── .gitignore             # Git ignore rules
+├── docs/                 # Documentation (user guides, reports, design notes)
+├── notebooks/            # Jupyter notebooks for experiments
+├── src/                  # Main Python source code
+│   └── mass_sim/         # Package folder (importable as import mass_sim)
+│       └── init.py
+├── tests/                # Unit & integration tests
+├── configs/              # JSON/YAML config files for simulation parameters
+├── scripts/              # Helper scripts for running tasks
+├── data/                 # Sample datasets or inputs (small!)
+│   └── .gitignore        # ignore big/raw data
+├── requirements.txt      # Python dependencies
+├── setup.py              # (optional) installable package
+├── README.md             # Overview & usage instructions
+└── .gitignore            # Git ignore rules
 
 
 ---
