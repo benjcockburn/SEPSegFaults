@@ -7,7 +7,7 @@ Multi-Ammunition Soft-Kill System (MASS). The goal is to simulate missile–ship
 
 
 Repository Structure
-mass-simulator/
+SEPSegFaults/
 ■■■ src/ # Source code
 ■ ■■■ algorithms/ # State space exploration algorithms
 ■ ■■■ simulation/ # Simulation engine and utilities
@@ -22,6 +22,24 @@ mass-simulator/
 ■■■ .gitignore # Ignored files
 ■■■ LICENSE # Project licence
 ■■■ README.md # This file
+
+
+SEPSegFaults/
+│
+├── docs/                  # Documentation (user guides, reports, design notes)
+├── notebooks/             # Jupyter notebooks for experiments
+├── src/                   # Main Python source code
+│   └── mass_sim/          # Package folder (importable as `import mass_sim`)
+│       └── __init__.py
+├── tests/                 # Unit & integration tests
+├── configs/               # JSON/YAML config files for simulation parameters
+├── scripts/               # Helper scripts for running tasks
+├── data/                  # Sample datasets or inputs (small!)
+│   └── .gitignore         # ignore big/raw data
+├── requirements.txt       # Python dependencies
+├── setup.py               # (optional) installable package
+├── README.md              # Overview & usage instructions
+└── .gitignore             # Git ignore rules
 
 
 Getting Started
@@ -46,7 +64,7 @@ Workflow:
 - main → stable code only
 - feature/ → new features or algorithms
 - fix/ → bug fixes
-- exp/ → experimental work
+- exp/ → experimental work - for experimental work use Python Notebooks to explain with visuals your ideas so other members can observe and analyse
 
 
 Rules:
