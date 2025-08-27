@@ -8,6 +8,7 @@ Multi-Ammunition Soft-Kill System (MASS). The goal is to simulate missile–ship
 ---
 
 ## Repository Structure
+```
 SEPSegFaults/
 ├── src/               # Source code
 │   ├── algorithms/    # State space exploration algorithms
@@ -23,7 +24,7 @@ SEPSegFaults/
 ├── .gitignore         # Ignored files
 ├── LICENSE            # Project licence
 └── README.md          # This file
-
+```
 ---
 
 ## Getting Started
