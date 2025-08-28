@@ -1,0 +1,50 @@
+Differential evolution overview
+A basic variant of the DE algorithm works by having a population of candidate solutions (called agents). These agents are moved around in the search space by using simple mathematical formulae to combine the positions of existing agents from the population. If the new position of an agent is an improvement, it is accepted and becomes part of the population; otherwise, it is discarded. The process is repeated, and by doing so, it is hoped, but not guaranteed, that a satisfactory solution will eventually be discovered. 
+The algorithm involves using a fitness function f that takes in a candidate solution and outputs a number that indicates the fitness of the given candidate solutions.
+The goal of DE is to find a solution m for which f(m)<f(p) for all p in the search space. (m is the global minimum)
+This means that while DE is not suitable to predict the state space, it can be used to optimise which indices to query in the state space. 
+
+The basic DE algorithm can then be described as follows:
+	Let x ∈ Rn designate a candidate solution (agent) in the population.
+	Let NP designate the population size
+	Let CR ∈ [0,1] designate the crossover probability
+	Let F ∈ [0,2] designate the differential weight
+Typical settings are NP = 10n (n=dimension of state space), CR = 0.9, F = 0.8
+	Initialise all agents x with random positions in the state space
+	Until termination criteria met (max iterations):
+	Pick distinct agents a, b, c 
+	Pick random index R ∈ [1, n]
+	Compute agents new position:
+	For each i ∈ { 1 , … , n } pick a uniformly distributed random number r∼U(0 , 1) 
+	If r < CR or i=R set y_i=a_i+F×(b_i-c_i) else: set y_i=x_i
+	If f(y)<f(x) replace the agent x in the population with the improved or equal candidate solution y 
+
+
+ 
+Integrating into the Inovor project:
+The scipy library has a built-in differential optimisation function, which can be used or potentially adapted to the project. scipy.optimize.differential_evolution
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html#differential-evolution
+
+Below is a potential program flow that integrates differential optimisation into the query selection phase:
+Program Flow:
+	Parse Inputs
+	dimensions (1, 2, or 3)
+	array_size (length of each dimension)
+	max_queries (query budget)
+	Initialize State Representation
+	Create an empty structure to store discovered truth values (array, matrix, or tensor).
+	Query selection (Differential Evolution
+	Candidate Solution = a set of query indices (max queries many)
+	Evolutionary Loop: DE mutates candidate sets of query indices until you reach a query plan.
+	Execution: Once the plan is fixed, you run the queries, then fill in the rest.
+	Prediction Phase
+	Once budget is exhausted, fill in the rest of the state-space with predictions.
+	Strategies:
+	Interpolation (e.g., nearest-neighbor, spline, kriging)
+	Model fitting (e.g., regression, GP surrogate, neural net trained on sampled points)
+	Black-box optimizer to minimize reconstruction error.
+	Submit Prediction
+	Output full state-space prediction.
+
+
+
