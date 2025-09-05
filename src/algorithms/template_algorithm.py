@@ -42,7 +42,7 @@ def generate_prediction(spec, asked):
 
     TODO: Replace with your own prediction logic.
     """
-    N = spec.N
+    N = spec.N_array_size
     if spec.dims == 1:
         return [0.0] * N
     if spec.dims == 2:
