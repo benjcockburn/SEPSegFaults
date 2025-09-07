@@ -83,6 +83,4 @@ Contributing
 5. Request a review
 
 
-Licence
-This project is owned by the Commonwealth of Australia.
-All rights reserved unless otherwise stated.
+
