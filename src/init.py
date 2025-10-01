@@ -22,7 +22,7 @@
 #       generate_prediction(...)
 #   - Use ./algorithms directory and 
 #    from algorithms import YOUR_ALGORITHM_NAME i.e"
-from algorithms import template_algorithm
+from algorithms import bayesian_spline_interpolation as template_algorithm
 # -----------------------------------------------------------------------------
 
 import sys
