@@ -22,6 +22,7 @@
 #       generate_prediction(...)
 #   - Use ./algorithms directory and 
 #    from algorithms import YOUR_ALGORITHM_NAME i.e"
+from algorithms import bayesian_quadratic
 from algorithms import template_algorithm
 # -----------------------------------------------------------------------------
 
@@ -55,10 +56,10 @@ class QueryResult:
 
 def choose_next_query(spec, asked):
     # change for your algorithm, make sure to import it before changing the base object
-    return template_algorithm.choose_next_query(spec, asked) 
+    return bayesian_quadratic.choose_next_query(spec, asked) 
 
 def generate_prediction(spec, asked):
-    return template_algorithm.generate_prediction(spec, asked)
+    return bayesian_quadratic.generate_prediction(spec, asked)
 
 # ------------------------------- I/O helpers ----------------------------------
 
