@@ -1,0 +1,39 @@
+Bayesian Spline Interpolation
+Summary:
+This method of interpolation, using Bayesian techniques, is quite complex. It may be outside the scope of what is achievable within the remaining time left in the semester to complete the project. 
+
+Bayesian P-spline interpolation is a Bayesian approach to smooth curve fitting or interpolation that combines:
+	P-splines (Penalized B-splines) — a flexible spline-based smoothing technique, and
+	Bayesian inference — to quantify uncertainty and estimate the smoothing automatically.
+
+P-splines:
+A P-spline models a smooth function f(x)as a linear combination of B-spline basis functions:
+f(x)=∑_(j=1)^K β_j B_j (x)
+where:
+	B_j (x)are B-spline basis functions (local polynomial pieces joined smoothly),
+	β_jare coefficients to be estimated.
+To avoid overfitting, a penalty on the roughness of fis added, typically on the differences between neighbouring coefficients:
+"Penalty"=λ∑_j(Δ^d β_j )^2
+where λ controls smoothness (large λ= smoother curve).
+
+Bayesian viewpoint
+In the Bayesian formulation, instead of adding a penalty term in an optimization problem, we treat it as a prior on the coefficients:
+β∼N(0,τ^2 Q^(-1))
+where:
+	Q encodes the difference penalty (e.g., a second-order difference matrix),
+	τ^2plays a role similar to 1/λ— it controls the smoothness,
+	τ^2can itself have a hyperprior (e.g., an inverse-Gamma), allowing data-driven smoothing.
+The likelihood typically assumes Gaussian noise:
+y_i∼N(f(x_i),σ^2)
+
+Inference:
+We then estimate the posterior distribution of:
+p(β,τ^2,σ^2∣y)
+using:
+	MCMC sampling (e.g. Gibbs or Hamiltonian Monte Carlo),
+	or variational inference / INLA (for faster approximate inference).
+This yields:
+	A posterior mean curve (the “best” estimate),
+	Credible intervals for f(x),
+	and a posterior distribution over the smoothing parameter — so smoothness is learned automatically.
+ 
