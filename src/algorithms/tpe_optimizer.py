@@ -1,5 +1,6 @@
 # Tree-structured Parzen Estimator (TPE)
 
+from scipy.stats import gaussian_kde
 import numpy as np
 
 class MinimalTPE:
@@ -15,10 +16,24 @@ class MinimalTPE:
         self.history.append((params, value))
 
     def suggest(self):
-        # Random sampling if not enough history
         if len(self.history) < 5:
             return tuple(self.rng.uniform(low, high) for low, high in self.bounds.values())
-        return tuple(self.rng.uniform(low, high) for low, high in self.bounds.values())
+
+        X = np.array([p for p, _ in self.history])
+        y = np.array([v for _, v in self.history])
+
+        # Good/bad split
+        n_good = max(1, int(len(y) * 0.2))
+        idx = np.argsort(y)
+        X_good, X_bad = X[idx[:n_good]], X[idx[n_good:]]
+
+        # KDEs
+        self.good_kde = gaussian_kde(X_good.T)
+        self.bad_kde = gaussian_kde(X_bad.T)
+
+        # Sample candidates from good KDE
+        candidates = self.good_kde.resample(self.n_samples).T
+        return tuple(candidates[0])
 
 
 def choose_next_query(spec, asked):
