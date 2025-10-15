@@ -31,9 +31,18 @@ class MinimalTPE:
         self.good_kde = gaussian_kde(X_good.T)
         self.bad_kde = gaussian_kde(X_bad.T)
 
-        # Sample candidates from good KDE
         candidates = self.good_kde.resample(self.n_samples).T
-        return tuple(candidates[0])
+        l_over_g = self.good_kde.pdf(candidates.T) / (self.bad_kde.pdf(candidates.T) + 1e-12)
+        best_idx = np.argmax(l_over_g)
+
+        best_candidate = np.clip(
+            candidates[best_idx],
+            [b[0] for b in self.bounds.values()],
+            [b[1] for b in self.bounds.values()]
+        )
+
+        return tuple(best_candidate)
+
 
 
 def choose_next_query(spec, asked):
