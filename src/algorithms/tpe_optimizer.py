@@ -45,21 +45,44 @@ class MinimalTPE:
 
 
 
+tpe_optimizer = None
+
 def choose_next_query(spec, asked):
-    """Placeholder for next query selection."""
-    if spec.dims == 1:
-        return (0,)
-    elif spec.dims == 2:
-        return (0, 0)
-    else:
-        return (0, 0, 0)
+    global tpe_optimizer
+
+    if tpe_optimizer is None:
+        bounds = {f"d{i}": (0, spec.N_array_size - 1) for i in range(spec.dims)}
+        tpe_optimizer = MinimalTPE(bounds=bounds, n_samples=100)
+
+        if len(asked) == 0:
+            return tuple(np.random.randint(0, spec.N_array_size) for _ in range(spec.dims))
+
+    if asked:
+        last_query = asked[-1]
+        tpe_optimizer.observe(last_query.index, last_query.value)
+
+    return tpe_optimizer.suggest()
+
 
 def generate_prediction(spec, asked):
-    """Placeholder for prediction."""
     N = spec.N_array_size
+    last_val = asked[-1].value if asked else 0.0
+
     if spec.dims == 1:
-        return [0.0] * N
+        return [last_val] * N
     elif spec.dims == 2:
-        return [[0.0] * N for _ in range(N)]
+        return [[last_val] * N for _ in range(N)]
     else:
-        return [[[0.0] * N for _ in range(N)] for _ in range(N)]
+        return [[[last_val] * N for _ in range(N)] for _ in range(N)]
+
+
+def generate_prediction(spec, asked):
+    N = spec.N_array_size
+    last_val = asked[-1].value if asked else 0.0
+
+    if spec.dims == 1:
+        return [last_val] * N
+    elif spec.dims == 2:
+        return [[last_val] * N for _ in range(N)]
+    else:
+        return [[[last_val] * N for _ in range(N)] for _ in range(N)]
