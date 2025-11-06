@@ -1,0 +1,76 @@
+Thompson Sampling for Bayesian Optimisation Overview
+
+Thompson Sampling (TS) is a probabilistic algorithm for balancing exploration and exploitation in optimisation problems, particularly when the objective function is expensive or unknown. It operates within the Bayesian optimisation framework, where a surrogate model (commonly a Gaussian Process, GP) represents the belief about the true function being optimised.
+
+At each iteration, Thompson Sampling samples a possible function from the surrogate’s posterior distribution and selects the point that maximises (or minimises) that sampled function. Over time, this stochastic sampling approach naturally balances exploring uncertain regions and exploiting regions known to yield good results.
+
+The goal of Thompson Sampling is to find a solution m* for which
+f(m*) < f(p)
+for all p in the search space (when minimising), based on posterior beliefs about f.
+
+While it does not attempt to exhaustively evaluate the entire state space, it efficiently determines which points to query next to improve the model and move toward the optimum.
+
+⸻
+
+The Basic Thompson Sampling Algorithm
+	•	Let f(x) be an unknown function to minimise or maximise.
+	•	Let p(f | D) represent the posterior distribution over functions given the data D = {(x₁, y₁), …, (xₙ, yₙ)}.
+	•	Let GP(μ(x), k(x, x′)) denote the Gaussian Process surrogate with mean function μ and covariance function k.
+
+Initialisation:
+	1.	Sample a small number of points x₁, …, xₖ and observe corresponding function values y₁, …, yₖ.
+	2.	Fit a Gaussian Process to these initial observations, forming a posterior belief about f.
+
+Iterative Loop (until termination criteria met, e.g. query budget or convergence):
+	1.	Posterior Sampling
+Sample a possible function f̃ from the current GP posterior p(f | D).
+	2.	Candidate Selection
+Choose the next query point xₙ₊₁ = argminₓ f̃(x) (for minimisation).
+	3.	Evaluation
+Query the true function f(xₙ₊₁) and observe yₙ₊₁.
+	4.	Update
+Augment the dataset: D ← D ∪ {(xₙ₊₁, yₙ₊₁)}
+Refit the GP model with the new data.
+	5.	Repeat steps 1–4 until the maximum number of queries is reached or the model converges.
+
+⸻
+
+Integrating into the Inovor Project
+
+The scikit-optimize and bayes-opt libraries in Python provide flexible Bayesian optimisation frameworks with support for Thompson Sampling or custom acquisition functions.
+	•	scikit-optimize (skopt)￼
+	•	bayes-opt￼
+
+⸻
+
+Potential Program Flow (Thompson Sampling for Query Selection)
+	1.	Parse Inputs
+	•	dimensions (1, 2, or 3)
+	•	array_size (length of each dimension)
+	•	max_queries (query budget)
+	2.	Initialise State Representation
+	•	Create a data structure to hold observed and predicted truth values.
+	•	Optionally define prior mean and covariance for the GP.
+	3.	Model Fitting (Initial Samples)
+	•	Select a small initial sample (random or Latin Hypercube).
+	•	Fit the GP to initial data.
+	4.	Query Selection (Thompson Sampling Loop)
+	•	For each iteration:
+	1.	Sample a function f̃ ~ p(f | D).
+	2.	Select xₙ₊₁ = argminₓ f̃(x).
+	3.	Query and observe yₙ₊₁.
+	4.	Update D and refit the GP.
+	5.	Prediction Phase
+	•	Once the query budget is exhausted, predict remaining state-space values using the posterior mean of the GP.
+	•	Possible strategies:
+	•	GP mean prediction
+	•	Kriging interpolation
+	•	Regression or neural surrogate refinement
+	6.	Submit Prediction
+	•	Output the full reconstructed state-space.
+
+⸻
+
+Verification
+
+Thompson Sampling provides a principled, probabilistic approach to active exploration and optimisation. However, due to its computational overhead and reliance on accurate GP modelling in high-dimensional spaces, investigation and implementation of Thompson Sampling within this project will be discontinued.
